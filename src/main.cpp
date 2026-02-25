@@ -1,8 +1,16 @@
+#include <sender.h>
 #include <Arduino.h>
-void setup() {
-// write your initialization code here
+
+void setup()
+{
+#if SENDER_CODE
+    senderSetup();
+#endif
 }
 
-void loop() {
-// write your code here
+void loop()
+{
+#if SENDER_CODE
+    senderLoop();
+#endif
 }
