@@ -1,5 +1,3 @@
-#define SENDER_CODE true
-
 enum class AnimationType
 {
     LOADING,
