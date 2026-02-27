@@ -44,16 +44,14 @@ public:
     {
         this->play(AnimationType::ANIM_SUCCESS)
             ->delayMs(2000)
-            ->play(AnimationType::HEARTBEAT)
-            ->delayMs(2000);
+            ->play(AnimationType::HEARTBEAT);
     }
 
     void playError()
     {
         this->play(AnimationType::ERROR)
             ->delayMs(2000)
-            ->play(AnimationType::HEARTBEAT)
-            ->delayMs(2000);
+            ->play(AnimationType::HEARTBEAT);
     }
 
 private:
