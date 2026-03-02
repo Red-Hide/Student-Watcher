@@ -5,7 +5,7 @@
 #else
     #include <receiver.h>
     #include <RTCManager.h>
-    #include <Wifi.h>
+    #include <WiFi.h>
     #include <PubSubClient.h>
 #endif
 
@@ -47,6 +47,10 @@ void setup()
             delay(500);
             Serial.print(".");
         }
+        Serial.println("WiFi connected");
+        Serial.println("IP address: ");
+        Serial.println(WiFi. localIP());
+        Serial.println(WiFi.gatewayIP());
 
         pubSubClient.setServer(MQTT_SERVER_IP, MQTT_SERVER_PORT);
     #endif
@@ -63,14 +67,14 @@ void loop()
             {
                 Serial.print("Connecting to MQTT...");
 
-                if (pubSubClient.connect("ESP32Client"))
+                if (pubSubClient.connect("ESP32Client", MQTT_USER, MQTT_PASSWORD))
                 {
                     Serial.println("connected");
                 }
                 else
                 {
                     Serial.print("failed, rc=");
-                    Serial.print(pubSubClient.state());
+                    Serial.println(pubSubClient.state());
                     delay(2000);
                 }
             }
@@ -85,6 +89,9 @@ void loop()
         {
             jsonData += R"(","timestamp":")" + rtc.getISO() + R"("})";
             pubSubClient.publish("Edusign", jsonData.c_str());
+            #if DEBUG
+                Serial.println(jsonData);
+            #endif
         }
     #endif
 }
