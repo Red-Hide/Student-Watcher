@@ -26,8 +26,7 @@ void setup()
         senderSetup();
     #else
         Serial.begin(9600);
-        while (!Serial)
-            ; // wait for serial port to connect (native USB)
+        while (!Serial); // wait for serial port to connect (native USB)
         Wire.begin();
         if (!rtc.begin())
         {
